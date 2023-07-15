@@ -1,0 +1,10 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/xplit_db
+    password: db_password
+    username: db_admin
+  flyway:
+    enabled: true
+    url: jdbc::postgresql://localhost:5432/xplit_db
+    user: db_admin
+    password: db_password
