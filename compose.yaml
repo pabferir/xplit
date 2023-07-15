@@ -1,0 +1,21 @@
+services:
+
+  postgres:
+    image: 'postgres:15.3-alpine'
+    environment:
+      - 'POSTGRES_DB=xplit_db'
+      - 'POSTGRES_PASSWORD=db_password'
+      - 'POSTGRES_USER=db_admin'
+    ports:
+      - '5432'
+
+  axonserver:
+    image: 'axoniq/axonserver:latest-dev'
+    hostname: axonserver
+    volumes:
+      - axonserver-data:/data
+      - axonserver-events:/events
+      - axonserver-config:/config:ro
+    ports:
+      - '8024:8024'
+      - '8124:8124'
