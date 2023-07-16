@@ -1,13 +1,12 @@
-package dev.pabferir.writemodel.activity;
+package dev.pabferir.writemodel.activities;
 
-import dev.pabferir.writemodel.activity.commands.CreateActivityCommand;
-import dev.pabferir.writemodel.activity.commands.EnrollParticipantsCommand;
-import dev.pabferir.writemodel.activity.events.ActivityCreatedEvent;
-import dev.pabferir.writemodel.activity.events.ParticipantsEnrolledEvent;
-import dev.pabferir.writemodel.activity.valueobjects.ActivityId;
-import dev.pabferir.writemodel.activity.valueobjects.Currency;
-import dev.pabferir.writemodel.activity.valueobjects.Money;
-import jakarta.validation.Valid;
+import dev.pabferir.writemodel.activities.commands.CreateActivityCommand;
+import dev.pabferir.writemodel.activities.commands.EnrollParticipantsCommand;
+import dev.pabferir.writemodel.activities.events.ActivityCreatedEvent;
+import dev.pabferir.writemodel.activities.events.ParticipantsEnrolledEvent;
+import dev.pabferir.writemodel.activities.valueobjects.ActivityId;
+import dev.pabferir.writemodel.activities.valueobjects.Currency;
+import dev.pabferir.writemodel.activities.valueobjects.Money;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -16,6 +15,7 @@ import org.axonframework.spring.stereotype.Aggregate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static org.axonframework.modelling.command.AggregateLifecycle.apply;
@@ -36,10 +36,10 @@ public class Activity {
 
     // region Command handlers
     @CommandHandler
-    Activity(@Valid CreateActivityCommand command) {
+    Activity(CreateActivityCommand command) {
         Optional<Currency> optionalCurrency = Currency.tryParseFromAlphaCode(command.currencyAlphaCode());
         if (optionalCurrency.isEmpty()) {
-            throw new IllegalStateException("Provided Currency is not recognized.");
+            throw new IllegalStateException("Provided currency is not recognized.");
         }
 
         apply(new ActivityCreatedEvent(
@@ -49,7 +49,7 @@ public class Activity {
     }
 
     @CommandHandler
-    void handle(@Valid EnrollParticipantsCommand command) {
+    void handle(EnrollParticipantsCommand command) {
         apply(new ParticipantsEnrolledEvent(command.participantNames()));
     }
 
@@ -75,4 +75,47 @@ public class Activity {
     }
 
     // endregion
+
+    public ActivityId getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public Money getTotalCost() {
+        return totalCost;
+    }
+
+    public List<Participant> getParticipants() {
+        return List.copyOf(participants);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Activity activity)) return false;
+        return Objects.equals(id, activity.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", currency=" + currency +
+                ", totalCost=" + totalCost +
+                ", participants=" + participants +
+                '}';
+    }
 }

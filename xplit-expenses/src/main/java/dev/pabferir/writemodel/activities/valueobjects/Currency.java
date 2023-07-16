@@ -1,4 +1,4 @@
-package dev.pabferir.writemodel.activity.valueobjects;
+package dev.pabferir.writemodel.activities.valueobjects;
 
 import java.util.Optional;
 

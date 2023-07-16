@@ -1,4 +1,4 @@
-package dev.pabferir.writemodel.activity.events;
+package dev.pabferir.writemodel.activities.events;
 
 import java.util.List;
 

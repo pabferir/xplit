@@ -1,13 +1,14 @@
-package dev.pabferir.writemodel.activity.valueobjects;
+package dev.pabferir.writemodel.activities.valueobjects;
 
 import org.axonframework.common.IdentifierFactory;
 
 import java.io.Serializable;
 
-public record ParticipantId(
+public record ActivityId(
         String value) implements Serializable {
 
-    public ParticipantId() {
+
+    public ActivityId() {
         this(IdentifierFactory.getInstance().generateIdentifier());
     }
 }

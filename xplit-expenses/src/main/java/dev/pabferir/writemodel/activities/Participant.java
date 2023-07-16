@@ -1,7 +1,7 @@
-package dev.pabferir.writemodel.activity;
+package dev.pabferir.writemodel.activities;
 
-import dev.pabferir.writemodel.activity.valueobjects.Money;
-import dev.pabferir.writemodel.activity.valueobjects.ParticipantId;
+import dev.pabferir.writemodel.activities.valueobjects.Money;
+import dev.pabferir.writemodel.activities.valueobjects.ParticipantId;
 import org.axonframework.modelling.command.EntityId;
 
 import java.util.Objects;
@@ -45,5 +45,14 @@ public class Participant {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Participant{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", balance=" + balance +
+                '}';
     }
 }
