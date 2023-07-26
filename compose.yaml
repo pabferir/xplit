@@ -2,6 +2,7 @@ services:
 
   postgres:
     image: 'postgres:15.3-alpine'
+    restart: unless-stopped
     environment:
       - 'POSTGRES_DB=xplit_db'
       - 'POSTGRES_PASSWORD=db_password'
@@ -12,6 +13,7 @@ services:
   axonserver:
     image: 'axoniq/axonserver:latest-dev'
     hostname: axonserver
+    restart: unless-stopped
     volumes:
       - axonserver-data:/data
       - axonserver-events:/events

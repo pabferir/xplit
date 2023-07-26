@@ -9,6 +9,7 @@ public final class ApiPaths {
 
     public static final class Activities {
         public static final String ENROLL_PARTICIPANTS = "/{activityId}/participants";
+        public static final String REGISTER_EXPENSE = "/{activityId}/expenses";
 
         private Activities() {
         }

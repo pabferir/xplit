@@ -4,17 +4,16 @@ import dev.pabferir.writemodel.activities.valueobjects.ActivityId;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 public record CreateActivityCommand(
         @TargetAggregateIdentifier
-        ActivityId id,
+        ActivityId activityId,
         String title,
         String currencyAlphaCode) implements Serializable {
 
     public CreateActivityCommand(String title,
                                  String currencyAlphaCode) {
-        this(new ActivityId(UUID.randomUUID().toString()),
+        this(new ActivityId(),
              title,
              currencyAlphaCode);
     }

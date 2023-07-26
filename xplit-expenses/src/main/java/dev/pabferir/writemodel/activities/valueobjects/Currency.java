@@ -1,8 +1,9 @@
 package dev.pabferir.writemodel.activities.valueobjects;
 
+import java.io.Serializable;
 import java.util.Optional;
 
-public enum Currency {
+public enum Currency implements Serializable {
     AUD("Australian Dollar", "AUD", "036", "A$", '$', SymbolNotation.AFTER),
     CHD("Swiss Franc", "CHD", "756", "Fr.", '₣', SymbolNotation.AFTER),
     CND("Canadian Dollar", "CND", "124", "C$", '$', SymbolNotation.AFTER),
@@ -68,7 +69,7 @@ public enum Currency {
         return symbolNotation;
     }
 
-    public enum SymbolNotation {
+    public enum SymbolNotation implements Serializable {
         BEFORE,
         BETWEEN,
         AFTER;

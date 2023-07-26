@@ -1,6 +1,7 @@
 package dev.pabferir.writemodel.activities;
 
 import dev.pabferir.writemodel.activities.valueobjects.ExpenseId;
+import dev.pabferir.writemodel.activities.valueobjects.Money;
 import dev.pabferir.writemodel.activities.valueobjects.ParticipantId;
 import org.axonframework.modelling.command.EntityId;
 
@@ -11,12 +12,31 @@ import java.util.Set;
 public class Expense {
     @EntityId
     private ExpenseId id;
+    private String title;
+    private Money amount;
     private ParticipantId paidBy;
     private Set<ParticipantId> paidFor;
     private Instant paidOn;
 
+    public Expense(String title, Money amount, ParticipantId paidBy, Set<ParticipantId> paidFor, Instant paidOn) {
+        this.id = new ExpenseId();
+        this.title = title;
+        this.amount = amount;
+        this.paidBy = paidBy;
+        this.paidFor = paidFor;
+        this.paidOn = paidOn;
+    }
+
     public ExpenseId getId() {
         return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Money getAmount() {
+        return amount;
     }
 
     public ParticipantId getPaidBy() {
@@ -41,15 +61,5 @@ public class Expense {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Expense{" +
-                "id=" + id +
-                ", paidBy=" + paidBy +
-                ", paidFor=" + paidFor +
-                ", paidOn=" + paidOn +
-                '}';
     }
 }
